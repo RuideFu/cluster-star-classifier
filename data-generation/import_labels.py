@@ -11,7 +11,7 @@ DB_USER = "root"
 DB_PASS = ""
 
 
-def main():
+def import_labels():
     # create engine and session
     db_uri = '{}://{}:{}@{}:{}/{}'.format(DB_BACKEND, DB_USER, DB_PASS, DB_HOST, DB_PORT, "astronomicon")
     engine = sa.create_engine(db_uri)
@@ -40,8 +40,9 @@ def main():
         if len(unique_obs_list) == 0 or unique_obs_list[-1]["cluster_id"] != obs["cluster_id"]:
             unique_obs_list.append(obs)
             print(unique_obs_list[-1])
-    print(len(unique_obs_list))
+    print("Total clusters: {}".format(len(unique_obs_list)))
+    return unique_obs_list
 
 
 if __name__ == '__main__':
-    main()
+    import_labels()
